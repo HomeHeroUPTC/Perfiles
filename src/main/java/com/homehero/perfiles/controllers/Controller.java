@@ -13,7 +13,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/Perfiles")
 public class Controller {
-
+/*
+* TO DO!:
+* - cambiar endpoints para que reciban el correo como id.
+* */
     @Autowired
     private Services service;
 
