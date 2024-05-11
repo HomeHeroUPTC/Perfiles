@@ -1,9 +1,9 @@
 package com.homehero.perfiles.services;
 
-import com.homehero.perfiles.models.Trabajador;
-import com.homehero.perfiles.models.Usuario;
-import com.homehero.perfiles.repositories.TrabajadorRepository;
-import com.homehero.perfiles.repositories.UsuarioRepository;
+import com.homehero.perfiles.models.Worker;
+import com.homehero.perfiles.models.Client;
+import com.homehero.perfiles.repositories.WorkerRepo;
+import com.homehero.perfiles.repositories.ClientRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -13,64 +13,64 @@ import java.util.Optional;
 public class Services {
 
     @Autowired
-    private UsuarioRepository repositoryUsuario;
+    private ClientRepo clientRepo;
 
     @Autowired
-    private TrabajadorRepository repositoryTrabajador;
+    private WorkerRepo workerRepo;
 
-    public Usuario createUsuario(Usuario usuario){
-        return repositoryUsuario.save(usuario);
+    public Client createClient(Client client){
+        return clientRepo.save(client);
     }
 
-    public Trabajador createTrabajador(Trabajador trabajador){
-        return repositoryTrabajador.save(trabajador);
+    public Worker createWorker(Worker worker){
+        return workerRepo.save(worker);
     }
 
-    public Optional<Usuario> updateUsuario(int id, Usuario usuario){
-        if (!repositoryUsuario.existsById(id)){
+    public Optional<Client> updateClient(long id, Client client){
+        if (!clientRepo.existsById((int) id)){
             return Optional.empty();
         }
-        usuario.setId_usuario(id);
-        return Optional.of(repositoryUsuario.save(usuario));
+        client.setId(id);
+        return Optional.of(clientRepo.save(client));
     }
 
-    public Optional<Trabajador> updateTrabajador(int id, Trabajador trabajador){
-        if (!repositoryTrabajador.existsById(id)){
+    public Optional<Worker> updateWorker(long id, Worker worker){
+        if (!workerRepo.existsById((int) id)){
             return Optional.empty();
         }
-        trabajador.setId_trabajador(id);
-        return Optional.of(repositoryTrabajador.save(trabajador));
+        worker.setId(id);
+        return Optional.of(workerRepo.save(worker));
     }
 
-    public boolean deletedUsuario(int id){
-        if (!repositoryUsuario.existsById(id)){
+    public boolean deletedClient(int id){
+        if (!clientRepo.existsById(id)){
             return false;
         }
-        repositoryUsuario.deleteById(id);
+        clientRepo.deleteById(id);
         return true;
     }
 
-    public boolean deletedTrabajador(int id){
-        if (!repositoryTrabajador.existsById(id)){
+    public boolean deletedWorker(int id){
+        if (!workerRepo.existsById(id)){
             return false;
         }
-        repositoryTrabajador.deleteById(id);
+        workerRepo.deleteById(id);
         return true;
     }
 
-    public List<Usuario> getAllUsuarios(){
-        return repositoryUsuario.findAll();
+    public List<Client> getAllClients(){
+        return clientRepo.findAll();
     }
 
-    public List<Trabajador> getAllTrabajadores(){
-        return repositoryTrabajador.findAll();
+    public List<Worker> getAllWorkers(){
+        return workerRepo.findAll();
     }
 
-    public Optional<Usuario> getUsuarioById(int id){
-        return repositoryUsuario.findById(id);
+    public Optional<Client> getClientById(int id){
+        return clientRepo.findById(id);
     }
 
-    public Optional<Trabajador> getTrabajadorById(int id){
-        return repositoryTrabajador.findById(id);
+    public Optional<Worker> getWorkerById(int id){
+        return workerRepo.findById(id);
     }
 }

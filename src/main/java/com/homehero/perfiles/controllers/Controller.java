@@ -1,7 +1,7 @@
 package com.homehero.perfiles.controllers;
 
-import com.homehero.perfiles.models.Trabajador;
-import com.homehero.perfiles.models.Usuario;
+import com.homehero.perfiles.models.Worker;
+import com.homehero.perfiles.models.Client;
 import com.homehero.perfiles.services.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,71 +11,71 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/homeHero-Perfiles")
+@RequestMapping(value = "/Perfiles")
 public class Controller {
 
     @Autowired
     private Services service;
 
-    @GetMapping(value = "/usuarios")
-    public List<Usuario> getAllUsuarios(){
-        return service.getAllUsuarios();
+    @GetMapping(value = "/Clients")
+    public List<Client> getAllClients(){
+        return service.getAllClients();
     }
 
-    @GetMapping(value = "/trabajadores")
-    public List<Trabajador> getAllTrabajadores(){
-        return service.getAllTrabajadores();
+    @GetMapping(value = "/Workers")
+    public List<Worker> getAllWorkers(){
+        return service.getAllWorkers();
     }
 
-    @GetMapping("/usuario/{id}")
-    public ResponseEntity<Usuario> getUsuarioById(@PathVariable("id") int id) {
-        Optional<Usuario> usuarioById = service.getUsuarioById(id);
-        return usuarioById.map(ResponseEntity::ok).orElseGet(
+    @GetMapping("/Client/{id}")
+    public ResponseEntity<Client> getClientById(@PathVariable("id") int id) {
+        Optional<Client> ClientById = service.getClientById(id);
+        return ClientById.map(ResponseEntity::ok).orElseGet(
                 () -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/trabajador/{id}")
-    public ResponseEntity<Trabajador> getTrabajadorById(@PathVariable("id") int id) {
-        Optional<Trabajador> trabajadorById = service.getTrabajadorById(id);
-        return trabajadorById.map(ResponseEntity::ok).orElseGet(
+    @GetMapping("/Worker/{id}")
+    public ResponseEntity<Worker> getWorkerById(@PathVariable("id") int id) {
+        Optional<Worker> WorkerById = service.getWorkerById(id);
+        return WorkerById.map(ResponseEntity::ok).orElseGet(
                 () -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping(value = "/usuario")
-    public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario){
-        Usuario createUsuario = service.createUsuario(usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createUsuario);
+    @PostMapping(value = "/Client")
+    public ResponseEntity<Client> createClient(@RequestBody Client client){
+        Client createClient = service.createClient(client);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createClient);
     }
 
-    @PostMapping(value = "/trabajador")
-    public ResponseEntity<Trabajador> createTrabajador(@RequestBody Trabajador trabajador){
-        Trabajador createTrabajador = service.createTrabajador(trabajador);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createTrabajador);
+    @PostMapping(value = "/Worker")
+    public ResponseEntity<Worker> createWorker(@RequestBody Worker worker){
+        Worker createWorker = service.createWorker(worker);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createWorker);
     }
 
-    @PutMapping("/usuario/{id}")
-    public ResponseEntity<Usuario> updateUsuario(@PathVariable("id") int id, @RequestBody Usuario usuario) {
-        Optional<Usuario> updateUsuario = service.updateUsuario(id, usuario);
-        return updateUsuario.map(ResponseEntity::ok).orElseGet(
+    @PutMapping("/Client/{id}")
+    public ResponseEntity<Client> updateClient(@PathVariable("id") int id, @RequestBody Client client) {
+        Optional<Client> updateClient = service.updateClient(id, client);
+        return updateClient.map(ResponseEntity::ok).orElseGet(
                 () -> ResponseEntity.noContent().build());
     }
 
-    @PutMapping("/trabajador/{id}")
-    public ResponseEntity<Trabajador> updateTrabajador(@PathVariable("id") int id, @RequestBody Trabajador trabajador) {
-        Optional<Trabajador> updateTrabajador = service.updateTrabajador(id, trabajador);
-        return updateTrabajador.map(ResponseEntity::ok).orElseGet(
+    @PutMapping("/Worker/{id}")
+    public ResponseEntity<Worker> updateWorker(@PathVariable("id") int id, @RequestBody Worker worker) {
+        Optional<Worker> updateWorker = service.updateWorker(id, worker);
+        return updateWorker.map(ResponseEntity::ok).orElseGet(
                 () -> ResponseEntity.noContent().build());
     }
 
-    @DeleteMapping("/usuario/{id}")
-    public ResponseEntity<Void> deletedusuarioById(@PathVariable("id") int id){
-        boolean deleted = service.deletedUsuario(id);
+    @DeleteMapping("/Client/{id}")
+    public ResponseEntity<Void> deletedClientById(@PathVariable("id") int id){
+        boolean deleted = service.deletedClient(id);
         return deleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/trabajador/{id}")
-    public ResponseEntity<Void> deletedTrabajadorById(@PathVariable("id") int id){
-        boolean deleted = service.deletedTrabajador(id);
+    @DeleteMapping("/Worker/{id}")
+    public ResponseEntity<Void> deletedWorkerById(@PathVariable("id") int id){
+        boolean deleted = service.deletedWorker(id);
         return deleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 }
