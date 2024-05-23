@@ -16,7 +16,7 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, length = 10)
-    private Long id;
+    private int id;
 
     @Column(nullable = false, length = 320)
     private String email;
@@ -29,6 +29,9 @@ public class Client {
 
     @Column(nullable = false, length = 100)
     private String city;
+
+    @Column(nullable = false)
+    private String image_url;
 
 }
 
