@@ -27,7 +27,7 @@ public class ClientServices {
     }
 
     public ClientDTO getClientByMail(String clientMail) {
-        String q = String.format("SELECT c.id, c.name, c.image_url, c.address FROM Client c WHERE c.email = %s", clientMail);
+        String q = String.format("SELECT c.id, c.name, c.image_url, c.address FROM Client c WHERE c.email = '%s'", clientMail);
         TypedQuery<Object[]> query = entityManager.createQuery(q, Object[].class);
         List<Object[]> results = query.getResultList();
         ClientDTO client = new ClientDTO();
