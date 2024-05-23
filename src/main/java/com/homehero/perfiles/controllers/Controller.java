@@ -1,10 +1,12 @@
 package com.homehero.perfiles.controllers;
 
 import com.homehero.perfiles.PerfilesDTO.ClientDTO;
+import com.homehero.perfiles.PerfilesDTO.HeroDTO;
 import com.homehero.perfiles.models.Client;
 import com.homehero.perfiles.models.ErrorResponse;
+import com.homehero.perfiles.models.Hero;
 import com.homehero.perfiles.services.ClientServices;
-import com.homehero.perfiles.services.WorkerServices;
+import com.homehero.perfiles.services.HeroServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class Controller {
 
     @Autowired
-    private WorkerServices workerServices;
+    private HeroServices heroServices;
 
     @Autowired
     private ClientServices clientServices;
@@ -35,6 +37,26 @@ public class Controller {
         try {
             ClientDTO client = clientServices.getClientByMail(client_mail);
             return new ResponseEntity<>(client, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorResponse("An error occurred while fetching services: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping(value = "/CreateHero")
+    public ResponseEntity<?> CreateHero(@RequestBody Hero hero){
+        try {
+            heroServices.createHero(hero);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorResponse("An error occurred while fetching services: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/GetHeroByMail")
+    public ResponseEntity<?> GetHeroByMail(@RequestParam String hero_mail) {
+        try {
+            HeroDTO hero = heroServices.getHeroByMail(hero_mail);
+            return new ResponseEntity<>(hero, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ErrorResponse("An error occurred while fetching services: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }

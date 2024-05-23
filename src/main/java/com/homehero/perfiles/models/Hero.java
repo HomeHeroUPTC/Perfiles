@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-public class Worker {
+public class Hero {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +35,9 @@ public class Worker {
 
     @Column(nullable = false, length = 100)
     private String city;
+
+    @Column(nullable = false)
+    private String image_url;
 
 }
 
