@@ -83,6 +83,16 @@ public class Controller {
         }
     }
 
+    @GetMapping(value = "/GetClientName")
+    public ResponseEntity<?> GetClientName(@RequestParam int client_id) {
+        try {
+            String name = heroServices.GetClientName(client_id);
+            return new ResponseEntity<>(name, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorResponse("An error occurred while fetching services: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping(value = "/GetHeroNeighborhood")
     public ResponseEntity<?> GetHeroNeighborhood(@RequestParam int hero_id) {
         try {

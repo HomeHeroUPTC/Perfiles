@@ -73,4 +73,17 @@ public class HeroServices {
             return null; // o lanzar una excepción personalizada
         }
     }
+
+    public String GetClientName(int clientid) {
+        String q = "SELECT c.name FROM Client c WHERE c.id = :clientid";
+        TypedQuery<String> query = entityManager.createQuery(q, String.class);
+        query.setParameter("clientid", clientid);
+
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            // Manejar el caso en que no se encuentra ningún resultado
+            return null; // o lanzar una excepción personalizada
+        }
+    }
 }
