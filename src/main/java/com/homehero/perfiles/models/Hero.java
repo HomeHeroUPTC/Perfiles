@@ -30,14 +30,26 @@ public class Hero {
     @Column(nullable = false, length = 120)
     private String job;
 
-    @Column(length = 150)
+    @Column(nullable = false, length = 150)
     private String address;
+
+    @Column(nullable = false, length = 150)
+    private String neighborhood;
 
     @Column(nullable = false, length = 100)
     private String city;
 
     @Column(nullable = false)
     private String image_url;
+
+    @Column(nullable = false, length = 15)
+    private String work_days;
+
+    @Column(nullable = false)
+    private int init_hour;
+
+    @Column(nullable = false)
+    private int end_hour;
 
 }
 

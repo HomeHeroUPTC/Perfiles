@@ -1,6 +1,7 @@
 package com.homehero.perfiles.controllers;
 
 import com.homehero.perfiles.PerfilesDTO.ClientDTO;
+import com.homehero.perfiles.PerfilesDTO.HeroAgendaDTO;
 import com.homehero.perfiles.PerfilesDTO.HeroDTO;
 import com.homehero.perfiles.models.Client;
 import com.homehero.perfiles.models.ErrorResponse;
@@ -61,4 +62,35 @@ public class Controller {
             return new ResponseEntity<>(new ErrorResponse("An error occurred while fetching services: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping(value = "/GetHeroAgenda")
+    public ResponseEntity<?> getHeroAgenda(@RequestParam int hero_id) {
+        try {
+            HeroAgendaDTO heroAgenda = heroServices.getHeroAgenda(hero_id);
+            return new ResponseEntity<>(heroAgenda, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorResponse("An error occurred while fetching services: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/GetHeroName")
+    public ResponseEntity<?> GetHeroName(@RequestParam int hero_id) {
+        try {
+            String name = heroServices.GetHeroName(hero_id);
+            return new ResponseEntity<>(name, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorResponse("An error occurred while fetching services: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/GetHeroNeighborhood")
+    public ResponseEntity<?> GetHeroNeighborhood(@RequestParam int hero_id) {
+        try {
+            String neighborhood = heroServices.GetHeroNeighborhood(hero_id);
+            return new ResponseEntity<>(neighborhood, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ErrorResponse("An error occurred while fetching services: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
